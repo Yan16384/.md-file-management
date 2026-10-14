@@ -1,2 +1,5 @@
-*.md -text
+.gitattributes text eol=lf
+README.md text eol=lf
+AGENTS.md -text
+用户md/*.md -text
 SHA256SUMS.txt -text
