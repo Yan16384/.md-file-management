@@ -145,10 +145,10 @@
 3. 实验数值不提升为通用规律；恢复出的设置标 `Recovered`，实际验证后才标 `Confirmed`；提案区分批准和未批准。
 4. 只读取和修改任务相关的文件。**不默认扫描 `sessions`、`archived_sessions` 或整个 `用户md`**；执行本节同步时，可读取 `C:\Users\Yan\.codex\用户md\` 直属目录中的全部 `.md` 文件用于完整备份，不递归读取其他目录。
 5. 权威文件修改后按影响范围验证：路径与文件名存在、引用及 Markdown 标题有效、无重复矛盾、无越界改动、无凭证明文、内容真实且文件可读取。失败先修复再同步。
-6. 备份仓库固定为 GitHub 私人仓库 `Yan16384/.md-file-management`。同步前确认仓库可访问且 `visibility=PRIVATE`；仓库根目录保存 `AGENTS.md`，`用户md/` 保存该目录下全部 `.md` 文件，`README.md` 说明用途、结构、同步与恢复方法，`SHA256SUMS.txt` 记录备份文件校验值。不得上传会话、缓存、配置数据库、凭证或其他未授权文件。
-7. 每次同步都创建新版本：首次版本为 `v1.0.0`，后续常规同步递增补丁号。提交信息和 Release 说明应概括实际变化；发布一个与版本号一致的完整 ZIP 备份资产，并保留历史 Release 供恢复。
-8. 发布顺序：同步最新权威文件 → 更新 README 和 SHA-256 清单 → 检查 Git diff 与备份文件集合 → 提交并推送 `main`（禁止强推）→ 创建版本 tag 和 GitHub Release → 上传 ZIP 资产。Git HTTPS 不可用时，可按第 3.3 节的 Git Data API 兜底方法以远端当前 commit/tree 为父级、`force=false` 更新。
-9. 发布后必须回读核验：远端仓库仍为 PRIVATE、`main` 指向本次提交、远端文件集合和 SHA-256 与本地一致、Release/tag 指向本次提交、ZIP 资产上传完成且 `/releases/latest` 为本次版本。全部通过后才报告同步发布完成。
+6. 备份仓库固定为 GitHub 私人仓库 `Yan16384/.md-file-management`。同步前确认仓库可访问且 `visibility=PRIVATE`；仓库根目录保存 `AGENTS.md`，`用户md/` 保存该目录下全部 `.md` 文件，根目录只保留一个 `README.md` 用于说明用途、结构、同步与恢复方法，`SHA256SUMS.txt` 记录备份文件校验值。不得上传会话、缓存、配置数据库、凭证或其他未授权文件。
+7. 每次同步都创建新版本：首次版本为 `v1.0.0`，后续常规同步递增补丁号。提交信息和 Release 说明应概括实际变化；备份文件通过 Git 逐文件提交，不制作或上传 ZIP 等自定义压缩包，并保留历史 Release 供恢复。GitHub 自动生成的 Source code (zip/tar.gz) 属于平台固定内容，不视为自定义备份资产。
+8. 发布顺序：同步最新权威文件 → 更新唯一的根目录 README 和 SHA-256 清单 → 检查 Git diff 与备份文件集合 → 提交并推送 `main`（禁止强推）→ 创建版本 tag 和 GitHub Release。Git HTTPS 不可用时，可按第 3.3 节的 Git Data API 兜底方法以远端当前 commit/tree 为父级、`force=false` 更新。
+9. 发布后必须回读核验：远端仓库仍为 PRIVATE、仓库中只有一个根目录 `README.md`、`main` 指向本次提交、远端文件集合和 SHA-256 与本地一致、Release/tag 指向本次提交、Release 没有自定义上传资产且 `/releases/latest` 为本次版本。全部通过后才报告同步发布完成。
 
 ## 5. 配置与权限边界
 
